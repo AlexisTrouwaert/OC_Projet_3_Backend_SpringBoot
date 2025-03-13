@@ -1,6 +1,5 @@
 package com.ChaTop.ChaTop.services;
 
-import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Optional;
 
@@ -23,8 +22,8 @@ public class CustomUserDetailsService implements UserDetailsService {
 	}
 	
 	@Override
-	public UserDetails loadUserByUsername(String name) throws UsernameNotFoundException {
-		Optional<User> userOpt = userRepository.findByName(name);
+	public UserDetails loadUserByUsername(String email) throws UsernameNotFoundException {
+		Optional<User> userOpt = userRepository.findByEmail(email);
 		
 		if(userOpt.isEmpty()) {
 			throw new UsernameNotFoundException("User not found");
@@ -33,7 +32,9 @@ public class CustomUserDetailsService implements UserDetailsService {
 		User user = userOpt.get();
 		
 		return new org.springframework.security.core.userdetails.User(
-                user.getEmail(), user.getPassword(), Collections.singletonList(new SimpleGrantedAuthority("ROLE_USER")) // Adapté à Spring Security
+                user.getEmail(), 
+                user.getPassword(), 
+                Collections.singletonList(new SimpleGrantedAuthority("ROLE_USER")) // Adapté à Spring Security
         );
 	}
 }
