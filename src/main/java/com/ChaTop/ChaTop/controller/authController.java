@@ -38,7 +38,7 @@ public class authController {
             
          // Authentifie l'utilisateur
             Authentication authentication = new UsernamePasswordAuthenticationToken(
-                    newUser.getEmail(), // Utilisation de l'email
+                    newUser.getEmail(),
                     newUser.getPassword(),
                     Collections.singletonList(new SimpleGrantedAuthority("ROLE_USER"))
             );
