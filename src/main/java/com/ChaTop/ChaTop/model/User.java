@@ -6,6 +6,8 @@ import java.util.List;
 import org.hibernate.annotations.CreationTimestamp;
 import org.hibernate.annotations.UpdateTimestamp;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
@@ -42,6 +44,7 @@ public class User {
 		private LocalDateTime updated_at;
 		
 		@OneToMany(mappedBy = "user") // Relation avec Rental
+		@JsonIgnore
 	    private List<Rental> rentals;
 	    
 	    @OneToMany(mappedBy = "user") // Relation avec Message

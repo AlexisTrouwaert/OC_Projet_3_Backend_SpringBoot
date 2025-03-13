@@ -4,6 +4,8 @@ import java.math.BigDecimal;
 import java.time.LocalDateTime;
 import java.util.List;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
@@ -44,7 +46,8 @@ public class Rental {
 	    private LocalDateTime updatedAt;
 
 	    @ManyToOne
-	    @JoinColumn(name = "user_id", nullable = false)
+	    @JsonIgnore
+	    @JoinColumn(name = "owner_id", nullable = false)
 	    private User user; // Relation avec la table users
 	    
 	    @OneToMany(mappedBy = "rental") // Relation avec Message
