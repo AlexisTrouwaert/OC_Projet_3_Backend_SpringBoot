@@ -14,6 +14,8 @@ import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.OneToMany;
+import jakarta.persistence.PrePersist;
+import jakarta.persistence.PreUpdate;
 import jakarta.persistence.Table;
 
 @Entity
@@ -36,11 +38,11 @@ public class User {
 		private String password;
 		
 		@CreationTimestamp
-		@Column(name = "created_at", columnDefinition = "TIMESTAMP DEFAULT CURRENT_TIMESTAMP")
+		@Column(name = "created_at")
 		private LocalDateTime created_at;
 		
 		@UpdateTimestamp
-		@Column(name = "updated_at", columnDefinition = "TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP")
+		@Column(name = "updated_at")
 		private LocalDateTime updated_at;
 		
 		@OneToMany(mappedBy = "user") // Relation avec Rental
@@ -49,6 +51,17 @@ public class User {
 	    
 	    @OneToMany(mappedBy = "user") // Relation avec Message
 	    private List<Message> messages;
+	    
+	    @PrePersist
+	    protected void onCreate() {
+	        created_at = LocalDateTime.now();
+	        updated_at = LocalDateTime.now();
+	    }
+
+	    @PreUpdate
+	    protected void onUpdate() {
+	    	updated_at = LocalDateTime.now();
+	    }
 	    
 	    //Definition des getter / setter
 		
