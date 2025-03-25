@@ -1,5 +1,8 @@
 package com.ChaTop.ChaTop.controller;
 
+import java.util.HashMap;
+import java.util.Map;
+
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -7,7 +10,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.ChaTop.ChaTop.dto.MessageRequest;
-import com.ChaTop.ChaTop.model.Message;
 import com.ChaTop.ChaTop.services.messageService;
 
 @RestController
@@ -21,8 +23,11 @@ public class messageController {
 	}
 
 	@PostMapping
-	public ResponseEntity<Message> createMessage(@RequestBody MessageRequest request){
-		Message newMessage = messageService.CreateMessage(request);
-		return ResponseEntity.status(201).body(newMessage);
+	public ResponseEntity<Map<String, String>> createMessage(@RequestBody MessageRequest request){
+		messageService.CreateMessage(request);
+		Map<String, String> response = new HashMap<>();
+	    response.put("message", "Message sent with success");
+
+	    return ResponseEntity.status(201).body(response);
 	}
 }

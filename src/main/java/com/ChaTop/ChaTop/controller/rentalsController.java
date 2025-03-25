@@ -1,10 +1,16 @@
 package com.ChaTop.ChaTop.controller;
 
+import java.io.IOException;
 import java.math.BigDecimal;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.Paths;
+import java.nio.file.StandardCopyOption;
 import java.time.LocalDateTime;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.UUID;
 
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
@@ -32,6 +38,7 @@ import com.ChaTop.ChaTop.services.rentalsService;
 @RequestMapping("/api/rentals")
 public class rentalsController {
 
+	//private static final String UPLOAD_DIR = "uploads/";
 	private final rentalsService rentalService;
 	private final RentalRepository rentalRepository;
 	private final UserRepository userRepository;
@@ -79,8 +86,21 @@ public class rentalsController {
 
         // Gérer l'image si elle est présente
         if (file != null && !file.isEmpty()) {
-            String fileName = StringUtils.cleanPath(file.getOriginalFilename());
-            rental.setPicture(fileName);
+        	try {
+        		Path uploadDir = Paths.get("uploads");
+        		if (!Files.exists(uploadDir)) {
+                    Files.createDirectories(uploadDir);
+        		}
+        		String fileName = UUID.randomUUID() + "_" + StringUtils.cleanPath(file.getOriginalFilename());
+        		Path filePath = uploadDir.resolve(fileName);
+        		Files.copy(file.getInputStream(), filePath, StandardCopyOption.REPLACE_EXISTING);
+        		
+        		rental.setPicture(fileName);
+        	} catch (IOException e) {
+                return ResponseEntity.internalServerError().body("Erreur lors de l'enregistrement de l'image");
+            }
+//            String fileName = StringUtils.cleanPath(file.getOriginalFilename());
+//            rental.setPicture(fileName);
         }
         
         Rental savedRental = rentalRepository.save(rental);
@@ -104,7 +124,7 @@ public class rentalsController {
 	}
 	
 	@PutMapping("/{id}")
-	public ResponseEntity<Rental> updateRental(
+	public ResponseEntity<Map<String, String>> updateRental(
 	        @PathVariable Integer id,
 	        @RequestParam(required = false) String name,
 	        @RequestParam(required = false) BigDecimal surface,
@@ -119,7 +139,13 @@ public class rentalsController {
 	    if (surface != null) rental.setSurface(surface);
 	    if (price != null) rental.setPrice(price);
 	    if (description != null) rental.setDescription(description);
+	    
+	    Map<String, String> response = new HashMap<>();
+	    response.put("message", "Rental updated !");
+	    rentalRepository.save(rental);
 
-	    return ResponseEntity.ok(rentalRepository.save(rental));
+	    return ResponseEntity.ok(response);
 	}
+	
+	
 }

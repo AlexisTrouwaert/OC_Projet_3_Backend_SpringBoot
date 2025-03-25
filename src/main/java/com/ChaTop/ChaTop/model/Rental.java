@@ -78,7 +78,7 @@ public class Rental {
 	    public BigDecimal getPrice() { return price; }
 	    public void setPrice(BigDecimal price) { this.price = price; }
 
-	    public String getPicture() { return picture; }
+	    public String getPicture()  {return (picture != null) ? "http://localhost:9000/" + picture : null;}
 	    public void setPicture(String picture) { this.picture = picture; }
 
 	    public String getDescription() { return description; }
