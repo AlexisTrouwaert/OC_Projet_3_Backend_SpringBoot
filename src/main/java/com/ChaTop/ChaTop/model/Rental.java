@@ -56,6 +56,7 @@ public class Rental {
 	    private LocalDateTime updatedAt;
 
 	    @ManyToOne
+	    @JsonProperty("owner_id")
 	    @JoinColumn(name = "owner_id", referencedColumnName = "id")
 	    private User owner; // Relation avec la table users
 	    
