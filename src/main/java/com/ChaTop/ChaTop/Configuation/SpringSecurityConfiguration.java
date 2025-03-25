@@ -84,7 +84,7 @@ public class SpringSecurityConfiguration {
 	@Bean
 	public CorsConfigurationSource corsConfigurationSource() {
 	    CorsConfiguration configuration = new CorsConfiguration();
-	    configuration.setAllowedOrigins(List.of("http://localhost:4200")); // Autoriser Angular
+	    configuration.setAllowedOrigins(List.of("http://localhost:4200", "http://localhost:9000")); // Autoriser Angular
 	    configuration.setAllowedMethods(List.of("GET", "POST", "PUT", "DELETE", "OPTIONS"));
 	    configuration.setAllowedHeaders(List.of("*"));
 	    configuration.setAllowCredentials(true);

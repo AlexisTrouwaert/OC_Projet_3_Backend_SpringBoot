@@ -2,6 +2,10 @@ package com.ChaTop.ChaTop.model;
 
 import java.time.LocalDateTime;
 
+import org.hibernate.annotations.CreationTimestamp;
+import org.hibernate.annotations.UpdateTimestamp;
+
+import com.fasterxml.jackson.annotation.JsonFormat;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
 import jakarta.persistence.Column;
@@ -26,10 +30,14 @@ public class Message {
 	@Column(length = 2000)
     private String message;
 	
+	@CreationTimestamp
 	@Column(name = "created_at")
+	@JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd HH:mm:ss")
     private LocalDateTime createdAt;
 
+	@UpdateTimestamp
     @Column(name = "updated_at")
+    @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd HH:mm:ss")
     private LocalDateTime updatedAt;
     
     @JsonIgnore

@@ -4,7 +4,11 @@ import java.math.BigDecimal;
 import java.time.LocalDateTime;
 import java.util.List;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
+import org.hibernate.annotations.CreationTimestamp;
+import org.hibernate.annotations.UpdateTimestamp;
+
+import com.fasterxml.jackson.annotation.JsonFormat;
+import com.fasterxml.jackson.annotation.JsonProperty;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
@@ -20,7 +24,7 @@ import jakarta.persistence.Table;
 @Table(name = "rentals")
 public class Rental {
 
-	 @Id
+	 	@Id
 	    @GeneratedValue(strategy = GenerationType.IDENTITY)
 	    private Integer id;
 
@@ -39,16 +43,23 @@ public class Rental {
 	    @Column(length = 2000)
 	    private String description;
 
+	    @CreationTimestamp
 	    @Column(name = "created_at", columnDefinition = "TIMESTAMP DEFAULT CURRENT_TIMESTAMP")
+	    @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd HH:mm:ss")
+	    @JsonProperty("created_at")
 	    private LocalDateTime createdAt;
 
+	    @UpdateTimestamp
 	    @Column(name = "updated_at", columnDefinition = "TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP")
+	    @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd HH:mm:ss")
+	    @JsonProperty("updated_at")
 	    private LocalDateTime updatedAt;
 
 	    @ManyToOne
-	    @JsonIgnore
-	    @JoinColumn(name = "owner_id", nullable = false)
-	    private User user; // Relation avec la table users
+	    @JoinColumn(name = "owner_id", referencedColumnName = "id")
+	    @JsonProperty("ownerId")
+	    private User owner; // Relation avec la table users
+	    
 	    
 	    @OneToMany(mappedBy = "rental") // Relation avec Message
 	    private List<Message> messages;
@@ -79,8 +90,8 @@ public class Rental {
 	    public LocalDateTime getUpdatedAt() { return updatedAt; }
 	    public void setUpdatedAt(LocalDateTime updatedAt) { this.updatedAt = updatedAt; }
 
-	    public User getUsers() { return user; }
-	    public void setOwner(User user) { this.user = user; }
+	    public Integer getOwner() { return owner != null ? owner.getId() : null; }
+	    public void setOwner(User owner) { this.owner = owner; }
 	    
 	    public List<Message> getMessages() { return messages; }
 	    public void setMessages(List<Message> messages) { this.messages = messages; }

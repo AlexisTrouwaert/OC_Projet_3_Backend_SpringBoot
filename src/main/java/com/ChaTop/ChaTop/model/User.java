@@ -6,6 +6,7 @@ import java.util.List;
 import org.hibernate.annotations.CreationTimestamp;
 import org.hibernate.annotations.UpdateTimestamp;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
 import jakarta.persistence.Column;
@@ -39,13 +40,15 @@ public class User {
 		
 		@CreationTimestamp
 		@Column(name = "created_at")
+		@JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd HH:mm:ss")
 		private LocalDateTime created_at;
 		
 		@UpdateTimestamp
 		@Column(name = "updated_at")
+		@JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd HH:mm:ss")
 		private LocalDateTime updated_at;
 		
-		@OneToMany(mappedBy = "user") // Relation avec Rental
+		@OneToMany(mappedBy = "owner") // Relation avec Rental
 		@JsonIgnore
 	    private List<Rental> rentals;
 	    
