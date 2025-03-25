@@ -57,7 +57,6 @@ public class Rental {
 
 	    @ManyToOne
 	    @JoinColumn(name = "owner_id", referencedColumnName = "id")
-	    @JsonProperty("ownerId")
 	    private User owner; // Relation avec la table users
 	    
 	    

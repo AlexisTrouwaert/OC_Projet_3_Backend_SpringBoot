@@ -38,6 +38,8 @@ public class SpringSecurityConfiguration {
 				.sessionManagement(session -> session.sessionCreationPolicy(SessionCreationPolicy.STATELESS))
 				.authorizeHttpRequests(auth -> 
 					auth.requestMatchers("/api/auth/register", "/api/auth/login").permitAll()
+					.requestMatchers("/swagger-ui.html", "/v3/api-docs/**", "/swagger-ui/**") // Permet l'accès à Swagger sans authentification
+                    .permitAll()
 						.anyRequest().authenticated())
 				.httpBasic(Customizer.withDefaults())
 				.oauth2ResourceServer((oauth2) -> oauth2.jwt(Customizer.withDefaults()))
