@@ -36,7 +36,7 @@ public class JWTFilter extends OncePerRequestFilter{
         String authHeader = request.getHeader(HttpHeaders.AUTHORIZATION);
         
         String requestURI = request.getRequestURI();
-        if (requestURI.startsWith("/api/auth/register") || requestURI.startsWith("/api/auth/login")) {
+        if (requestURI.startsWith("/api/auth/register") || requestURI.startsWith("/api/auth/login") || requestURI.startsWith("/api/image"))  {
             filterChain.doFilter(request, response);
             return;
         }

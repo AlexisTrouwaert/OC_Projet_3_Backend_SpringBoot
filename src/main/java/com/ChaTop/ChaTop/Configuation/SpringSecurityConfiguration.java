@@ -26,6 +26,8 @@ import org.springframework.web.cors.UrlBasedCorsConfigurationSource;
 import com.ChaTop.ChaTop.services.CustomUserDetailsService;
 import com.nimbusds.jose.jwk.source.ImmutableSecret;
 
+import io.github.cdimascio.dotenv.Dotenv;
+
 @Configuration
 public class SpringSecurityConfiguration {
 
@@ -38,6 +40,7 @@ public class SpringSecurityConfiguration {
 				.sessionManagement(session -> session.sessionCreationPolicy(SessionCreationPolicy.STATELESS))
 				.authorizeHttpRequests(auth -> 
 					auth.requestMatchers("/api/auth/register", "/api/auth/login").permitAll()
+					.requestMatchers("/api/image/**").permitAll()
 					.requestMatchers("/swagger-ui.html", "/v3/api-docs/**", "/swagger-ui/**") // Permet l'accès à Swagger sans authentification
                     .permitAll()
 						.anyRequest().authenticated())
@@ -70,7 +73,9 @@ public class SpringSecurityConfiguration {
 	    return authenticationConfiguration.getAuthenticationManager();
 	}
 	
-	private String jwtKey = "sDO1Zrd0S1TTZ0FbdObKANAzU5BrNMTp";
+	private static final Dotenv dotenv = Dotenv.load();
+    private static final String jwtKey = dotenv.get("JWT_KEY");
+	
 	
 	@Bean
 	public JwtDecoder jwtDecoder() {
@@ -88,7 +93,7 @@ public class SpringSecurityConfiguration {
 	    CorsConfiguration configuration = new CorsConfiguration();
 	    configuration.setAllowedOrigins(List.of("http://localhost:4200", "http://localhost:9000")); // Autoriser Angular
 	    configuration.setAllowedMethods(List.of("GET", "POST", "PUT", "DELETE", "OPTIONS"));
-	    configuration.setAllowedHeaders(List.of("*"));
+	    configuration.setAllowedHeaders(List.of("*", "Authorization"));
 	    configuration.setAllowCredentials(true);
 
 	    UrlBasedCorsConfigurationSource source = new UrlBasedCorsConfigurationSource();
