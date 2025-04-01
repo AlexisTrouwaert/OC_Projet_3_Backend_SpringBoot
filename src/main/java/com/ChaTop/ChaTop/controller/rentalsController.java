@@ -38,7 +38,6 @@ import com.ChaTop.ChaTop.services.rentalsService;
 @RequestMapping("/api/rentals")
 public class rentalsController {
 
-	//private static final String UPLOAD_DIR = "uploads/";
 	private final rentalsService rentalService;
 	private final RentalRepository rentalRepository;
 	private final UserRepository userRepository;
@@ -70,11 +69,11 @@ public class rentalsController {
         Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
         String userEmail = authentication.getName();
 
-        // 🔥 2. Chercher l'utilisateur en base
+        // Chercher l'utilisateur en base
         User user = userRepository.findByEmail(userEmail)
                 .orElseThrow(() -> new RuntimeException("Utilisateur non trouvé"));
 
-        // 🔥 3. Création de l'entité Rental avec owner_id
+        // Création de l'entité Rental avec owner_id
         Rental rental = new Rental();
         rental.setName(name);
         rental.setSurface(surface);
@@ -99,8 +98,6 @@ public class rentalsController {
         	} catch (IOException e) {
                 return ResponseEntity.internalServerError().body("Erreur lors de l'enregistrement de l'image");
             }
-//            String fileName = StringUtils.cleanPath(file.getOriginalFilename());
-//            rental.setPicture(fileName);
         }
         
         Rental savedRental = rentalRepository.save(rental);
@@ -130,7 +127,7 @@ public class rentalsController {
 	        @RequestParam(required = false) BigDecimal surface,
 	        @RequestParam(required = false) BigDecimal price,
 	        @RequestParam(required = false) String description,
-	        @RequestParam(required = false) MultipartFile picture // Si tu veux gérer une image
+	        @RequestParam(required = false) MultipartFile picture // Gestion d'une image
 	) {
 	    Rental rental = rentalRepository.findById(id)
 	            .orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND, "Location non trouvée"));

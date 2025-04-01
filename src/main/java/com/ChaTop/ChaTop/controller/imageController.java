@@ -12,12 +12,17 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import io.github.cdimascio.dotenv.Dotenv;
+
 
 @RestController
 @RequestMapping("/api/image")
 public class imageController {
+	
+	private static final Dotenv dotenv = Dotenv.load();
+	private final static String UploadDir = dotenv.get("UPLOAD_DIR");
 
-	private static final String UPLOAD_DIR = "C:/Users/alexi/Desktop/ChaTop/uploads/";
+	private static final String UPLOAD_DIR = UploadDir;
 
 	@GetMapping("/{fileName}")
     public ResponseEntity<Resource> getImage(@PathVariable String fileName) {
