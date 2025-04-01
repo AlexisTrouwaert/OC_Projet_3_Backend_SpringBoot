@@ -54,27 +54,13 @@ public class SpringSecurityConfiguration {
 		return new BCryptPasswordEncoder();
 	}
 	
-//	@Bean
-//	public UserDetailsService users() {
-//		UserDetails user = User.builder().username("user").password(passwordEncoder().encode("password")).roles("USER").build();
-//		return new InMemoryUserDetailsManager(user);
-//	}
-	
-//	@Bean
-//    public AuthenticationManager authenticationManager(UserDetailsService userDetailsService) {
-//        DaoAuthenticationProvider authProvider = new DaoAuthenticationProvider();
-//        authProvider.setUserDetailsService(userDetailsService);
-//        authProvider.setPasswordEncoder(passwordEncoder());
-//        return new ProviderManager(authProvider);
-//    }
-	
 	@Bean
 	public AuthenticationManager authenticationManager(AuthenticationConfiguration authenticationConfiguration) throws Exception {
 	    return authenticationConfiguration.getAuthenticationManager();
 	}
 	
 	private static final Dotenv dotenv = Dotenv.load();
-    private static final String jwtKey = dotenv.get("JWT_KEY");
+    private final String jwtKey = dotenv.get("JWT_KEY");
 	
 	
 	@Bean
