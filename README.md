@@ -145,7 +145,7 @@ Configuration des variables d'environnement
 
 7 - Pour la gestion des fichiers envoyés, créez un dossier à l'endroit de votre choix sur votre système et copiez son chemin dans la variable UPLOAD_DIR.
 
-8 - Entrer vos identifiants dans DB_USER et DB_PASSWORD
+8 - Entrer vos identifiants MySQL dans DB_USER et DB_PASSWORD
 
 # Lancer le projet
 
