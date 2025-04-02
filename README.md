@@ -150,9 +150,13 @@ Configuration des variables d'environnement
 # Lancer le projet
 
 1 - Ouvrez le terminal dans votre IDE, naviguez à la racine du projet Angular, puis exécutez :
+    `npm install`
+    and
     `ng serve`
 
 2 - Dans un autre terminal, naviguez à la racine du projet Spring Boot, puis exécutez :
+    `mvn install`
+    and
     `mvn spring-boot:run`
 
 3 - Dans votre navigateur, accédez à http://localhost:4200/.
