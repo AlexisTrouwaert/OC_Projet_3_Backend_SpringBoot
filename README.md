@@ -9,7 +9,7 @@ First, you need to fork and clone these two repositories:
 
 Once done, follow these steps:
 
-1 - Navigate to the Angular project, open the resources directory, and go to the sql folder.
+1 - Navigate to the Angular project, open the resources directory, and go to the sql folder to find "script.sql".
 
 2 - Open your SQL command-line client and log in.
 
@@ -24,7 +24,7 @@ Once done, follow these steps:
     `USE name_of_your_database;`
 
 6 - Run your SQL script with the following command (on Windows CMD):
-    `mysql --user="your_username" --database="name_of_your_database" --password="your_password" < path_to_your_sql_script`
+    `mysql --user="your_username" --database="name_of_your_database" --password="your_password" < path/to/script.sql`
 
 7 - To ensure everything is set up correctly, run:
     `SHOW TABLES`
@@ -94,7 +94,7 @@ Tout d'abord, vous devez forker et cloner ces deux dépôts :
 
 Une fois cela fait, suivez ces étapes :
 
-1 - Accédez au projet Angular, ouvrez le dossier resources, puis rendez-vous dans le dossier sql.
+1 - Accédez au projet Angular, ouvrez le dossier resources, puis rendez-vous dans le dossier sql pour trouver "script.sql".
 
 2 - Ouvrez votre client SQL en ligne de commande et connectez-vous.
 
@@ -109,7 +109,7 @@ Une fois cela fait, suivez ces étapes :
     `USE name_of_your_database;`
 
 6 - Exécutez votre script SQL avec la commande suivante (sur Windows CMD) :
-    `mysql --user="your_username" --database="name_of_your_database" --password="your_password" < path_to_your_sql_script`
+    `mysql --user="your_username" --database="name_of_your_database" --password="your_password" < chemin/vers/script.sql`
 
 7 - Pour vérifier que tout est bien configuré, exécutez :
     `SHOW TABLES`
