@@ -4,8 +4,8 @@
 
 First, you need to fork and clone these two repositories: 
 
-https://github.com/AlexisTrouwaert/OC_Projet_3_Backend_SpringBoot.git
-https://github.com/AlexisTrouwaert/Projet_3_backend_Java_OC.git
+[Backend](https://github.com/AlexisTrouwaert/OC_Projet_3_Backend_SpringBoot.git)
+[Frontend](https://github.com/AlexisTrouwaert/Projet_3_backend_Java_OC.git)
 
 Once done, follow these steps:
 
@@ -14,7 +14,7 @@ Once done, follow these steps:
 2 - Open your SQL command-line client and log in.
 
 3 - Create your database by running: 
-    `CREATE DATABSE name_of_your_database;`
+    `CREATE DATABASE name_of_your_database;`
     (You can choose any name you want for your database.)
 
 4 - Verify that your database has been created by running:
@@ -52,9 +52,11 @@ Configuring Environment Variables
     JWT_KEY=
     UPLOAD_DIR=
 
-5 - To generate a JWT key, go to 8gwifi.org, select HS256, generate the signature, and copy it into the JWT_KEY variable.
+5 - The database url should looks like this : jdbc:mysql://localhost:3306/name_of_your_database
 
-6 - For file uploads, create a directory anywhere on your system and paste its path into the UPLOAD_DIR variable.
+6 - To generate a JWT key, go to [8gwifi.org](https://8gwifi.org/jwsgen.jsp), select HS256, generate the signature, and copy it into the JWT_KEY variable.
+
+7 - For file uploads, create a directory anywhere on your system and paste its path into the UPLOAD_DIR variable.
 
 # Run the project
 
@@ -87,8 +89,8 @@ To see the documentation, you can go to :
 
 Tout d'abord, vous devez forker et cloner ces deux dépôts :
 
-https://github.com/AlexisTrouwaert/OC_Projet_3_Backend_SpringBoot.git
-https://github.com/AlexisTrouwaert/Projet_3_backend_Java_OC.git
+[Backend](https://github.com/AlexisTrouwaert/OC_Projet_3_Backend_SpringBoot.git)
+[Frontend](https://github.com/AlexisTrouwaert/Projet_3_backend_Java_OC.git)
 
 Une fois cela fait, suivez ces étapes :
 
@@ -97,7 +99,7 @@ Une fois cela fait, suivez ces étapes :
 2 - Ouvrez votre client SQL en ligne de commande et connectez-vous.
 
 3 - Créez votre base de données en exécutant la commande suivante :
-    `CREATE DATABSE name_of_your_database;`
+    `CREATE DATABASE name_of_your_database;`
     (Vous pouvez choisir n'importe quel nom pour votre base de données.)
 
 4 - Vérifiez que votre base de données a bien été créée en exécutant :
@@ -135,6 +137,31 @@ Configuration des variables d'environnement
     JWT_KEY=
     UPLOAD_DIR=
 
-5 - Pour générer une clé JWT, rendez-vous sur [8gwifi.org](https://8gwifi.org/jwsgen.jsp), sélectionnez HS256, générez la signature, puis copiez-la dans la variable JWT_KEY.
+5 - L'URL de la base de donnée ressemble à cela : jdbc:mysql://localhost:3306/name_of_your_database
 
-6 - For file uploads, create a directory anywhere on your system and paste its path into the UPLOAD_DIR variable.
+6 - Pour générer une clé JWT, rendez-vous sur [8gwifi.org](https://8gwifi.org/jwsgen.jsp), sélectionnez HS256, générez la signature, puis copiez-la dans la variable JWT_KEY.
+
+7 - Pour la gestion des fichiers envoyés, créez un dossier à l'endroit de votre choix sur votre système et copiez son chemin dans la variable UPLOAD_DIR.
+
+# Lancer le projet
+
+1 - Ouvrez le terminal dans votre IDE, naviguez à la racine du projet Angular, puis exécutez :
+    `ng serve`
+
+2 - Dans un autre terminal, naviguez à la racine du projet Spring Boot, puis exécutez :
+    `mvn spring-boot:run`
+
+3 - Dans votre navigateur, accédez à http://localhost:4200/.
+
+# Description du projet
+
+ChâTop est une application qui permet aux utilisateurs de proposer des biens immobiliers à la location et de faciliter la mise en relation entre locataires et propriétaires.
+Grâce à cette plateforme, un propriétaire peut publier une annonce pour son bien, et un locataire peut le contacter directement via un système de messagerie intégré.
+De plus, l’application met en place des mesures de sécurité pour ses utilisateurs grâce à l’intégration de Spring Security et à l’utilisation de tokens.
+
+# Documentation des routes
+
+Pour consulter la documentation, rendez-vous sur :
+    http://localhost:9000/swagger-ui/index.html#/
+    ou
+    https://demos.springdoc.org/demo-spring-boot-3-webmvc/swagger-ui/index.html
